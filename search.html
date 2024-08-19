@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="En">
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+
+</head>
+<body>
+<h1>Annual Planner App CPA Assignment 2</h1>
+<div id="firebase-auth-container"></div>
+<button id="sign-out" hidden="true">Sign out</button>
+<div id="login-info" hidden="true">
+    <h2>Login Info</h2>
+      {% if user_data %}
+        <dl>
+            <dt>Name:</dt><dd>{{ user_data['name'] }}</dd>
+            <dt>Email:</dt><dd>{{ user_data['email'] }}</dd>
+        </dl>
+        {% endif %}
+    <h2>Menu</h2>
+
+<body>
+    <h1>Search Page</h1>
+    <form action="/search" method="post">
+        <label for="search_query">Search:</label>
+        <input type="text" name="search_query" id="search_query">
+        <input type="submit" value="Search">
+    </form>
+</body>
+
+
+      {% for i in data %}
+      Name: {{ i['name'] }}<br/>
+      ID: {{ i['id'] }}<br/>
+      Boolean: {{ i['boolean'] }}<br/>
+      {% endfor %}
+        <p>Error Message: {{ error_message }}</p>
+</div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+
+</body>
+</html>

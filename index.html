@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="En">
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css"/>
+
+</head>
+<body>
+<h1>Instagram App CPA Assignment 3</h1>
+<div id="firebase-auth-container"></div>
+<button id="sign-out" hidden="true">Sign out</button>
+<div id="login-info" hidden="true">
+    {% if user_data %}
+    <div id="login-info">
+        <h2>Login Info</h2>
+        <dl>
+            <dt>Name:</dt>
+            <dd>{{ user_data['name'] }}</dd>
+            <dt>Email:</dt>
+            <dd>{{ user_data['email'] }}</dd>
+        </dl>
+        <h2>Menu</h2>
+        <a href="/add_post">Add Post</a><br>
+        <a href="/timeline">Timeline</a><br>
+        <a href="/search">Search</a><br>
+            <form action="/delete" method="post">
+                <label for="delete_post">Enter Post ID</label>
+                <input type="text" name="post_id" value="{{ post_id }}">
+                <button type="submit">Delete Post</button>
+            </form>
+
+            <form action="/remove" method="post">
+                <label for="remove_email">Email to remove:</label>
+                <input type="email" name="remove_email" required>
+                <br>
+                <input type="radio" name="remove_type" value="follower" id="remove_follower" required>
+                <label for="remove_follower">Remove follower</label>
+                <input type="radio" name="remove_type" value="following" id="remove_following">
+                <label for="remove_following">Remove following</label>
+                <br>
+            </form>
+            <form action="/add_follower" method="POST">
+                <label for="follower_email">Follower Email:</label>
+                <input type="email" id="follower_email" name="follower_email" required>
+                <button type="submit">Add Follower</button>
+            </form>
+            <form action="/add_following" method="POST">
+                <label for="following_email">Following Email:</label>
+                <input type="email" id="following_email" name="following_email" required>
+                <button type="submit">Add Following</button>
+            </form>
+            <form action="/retrieve_list" method="get">
+                <label for="list_type">Select a list:</label><br>
+                <input type="radio" id="followers" name="list_type" value="followers">
+                <label for="followers">Followers</label><br>
+                <input type="radio" id="following" name="list_type" value="following">
+                <label for="following">Following</label><br><br>
+                <input type="submit" value="Retrieve List">
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+    <script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+
+</body>
+</html>

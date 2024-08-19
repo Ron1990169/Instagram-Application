@@ -1,0 +1,13 @@
+indexes:
+- kind: post
+  properties:
+  - name: caption
+  - name: description
+  - name: public_url
+  - name: tags
+  - name: timestamp
+  - name: post_id
+
+
+# Path: CPA/Assignment/index.yaml
+

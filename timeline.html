@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css"/>
+
+</head>
+<body>
+<h1>Instagram App CPA Assignment 3</h1>
+<div id="firebase-auth-container"></div>
+<button id="sign-out" hidden="true">Sign out</button>
+<div id="login-info" hidden="true">
+    {% if user_data %}
+        <div id="login-info">
+            <h2>Login Info</h2>
+            <dl>
+                <dt>Name:</dt>
+                <dd>{{ user_data['name'] }}</dd>
+                <dt>Email:</dt>
+                <dd>{{ user_data['email'] }}</dd>
+            </dl>
+            <h2>Menu</h2>
+            <h1>Timeline of Posts</h1><br/>
+            <form action="/retrieve_posts" method="get">
+                <label for="post_type">Select a post type:</label><br>
+                <input type="radio" id="all_posts" name="post_type" value="all_posts" checked>
+                <label for="all_posts">All Posts</label><br>
+                <input type="submit" value="Retrieve Posts">
+            </form>
+            <h1>List of Posts</h1><br/>
+            {% for post in get_post %}
+                <div class="post">
+                    <img src="{{ url_for('download_file', filename=post['image_path']) }}" alt="Post image">
+                    <p>{{ post['caption'] }}</p>
+                    <p>{{ post['user_email'] }}</p>
+                    <p>{{ post['timestamp'] }}</p>
+                </div>
+            {% endfor %}
+            {% for i in directory_list %}
+                {{ i.name }}<br/>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div id="login-info">
+            <h2>Login Info</h2>
+            <p>Not logged in</p>
+        </div>
+    {% endif %}
+    <a href="/add_comment/">To add Comment Click here</a><br>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+
+</body>
+</html>

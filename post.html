@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="En">
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css"/>
+
+</head>
+<body>
+<h1>Instagram App CPA Assignment 3</h1>
+<div id="firebase-auth-container"></div>
+<button id="sign-out" hidden="true">Sign out</button>
+<div id="login-info" hidden="true">
+    {% if user_data %}
+        <dl>
+            <dt>Name:</dt>
+            <dd>{{ user_data['name'] }}</dd>
+            <dt>Email:</dt>
+            <dd>{{ user_data['email'] }}</dd>
+        </dl>
+    {% endif %}
+    <body>
+    {% block content_1 %}
+        <h2>Add Post Menu</h2>
+        <form method="post" action="/add_post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="caption">Caption:</label>
+                <input type="text" class="form-control" id="caption" name="caption" required>
+            </div>
+            <div class="form-group">
+                <label for="full_name">Description:</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="tags">Tags:</label>
+                <input type="text" class="form-control" id="tags" name="tags" required>
+            </div>
+            <div class="form-group">
+                <label for="image_file">Image:</label>
+                <input type="file" class="form-control-file" id="image_file" name="image_file" accept="image/*"
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Post</button>
+        </form>
+    {% endblock %}
+
+
+    </body>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+
+</body>
+</html>
